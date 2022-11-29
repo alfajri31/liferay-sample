@@ -1,0 +1,10 @@
+Bundle-Name: guidebook-api
+Bundle-SymbolicName: com.liferay.docs.guidebook.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	com.liferay.docs.guidebook.exception,\
+	com.liferay.docs.guidebook.model,\
+	com.liferay.docs.guidebook.service,\
+	com.liferay.docs.guidebook.service.persistence
+-check: EXPORTS
+-includeresource: META-INF/service.xml=../guidebook-service/service.xml

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+
+<beans
+	default-destroy-method="destroy"
+	default-init-method="afterPropertiesSet"
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+>
+	<bean class="com.docs.guidebook.service.impl.EntryLocalServiceImpl" id="com.docs.guidebook.service.EntryLocalService" />
+	<bean class="com.docs.guidebook.service.impl.EntryServiceImpl" id="com.docs.guidebook.service.EntryService" />
+	<bean class="com.docs.guidebook.service.persistence.impl.EntryPersistenceImpl" id="com.docs.guidebook.service.persistence.EntryPersistence" parent="basePersistence" />
+	<bean class="com.docs.guidebook.service.impl.GuidebookLocalServiceImpl" id="com.docs.guidebook.service.GuidebookLocalService" />
+	<bean class="com.docs.guidebook.service.impl.GuidebookServiceImpl" id="com.docs.guidebook.service.GuidebookService" />
+	<bean class="com.docs.guidebook.service.persistence.impl.GuidebookPersistenceImpl" id="com.docs.guidebook.service.persistence.GuidebookPersistence" parent="basePersistence" />
+</beans>

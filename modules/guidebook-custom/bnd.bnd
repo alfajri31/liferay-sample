@@ -1,0 +1,4 @@
+Bundle-Name: guidebook-custom
+Bundle-SymbolicName: com.docs.guidebook.portlet
+Bundle-Version: 1.0.0
+Export-Package: com.docs.guidebook.portlet.constants
