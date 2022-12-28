@@ -14,11 +14,13 @@
 
 package com.docs.guidebook.service;
 
-import aQute.bnd.annotation.ProviderType;
+import com.docs.guidebook.model.Entry;
 
-import org.osgi.framework.Bundle;
-import org.osgi.framework.FrameworkUtil;
-import org.osgi.util.tracker.ServiceTracker;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+
+import java.util.List;
 
 /**
  * Provides the remote service utility for Entry. This utility wraps
@@ -32,7 +34,6 @@ import org.osgi.util.tracker.ServiceTracker;
  * @see EntryService
  * @generated
  */
-@ProviderType
 public class EntryServiceUtil {
 
 	/*
@@ -40,6 +41,47 @@ public class EntryServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to <code>com.docs.guidebook.service.impl.EntryServiceImpl</code> and rerun ServiceBuilder to regenerate this class.
 	 */
+	public static Entry addEntry(
+			long userId, long guestbookId, String name, String email,
+			String message,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws PortalException {
+
+		return getService().addEntry(
+			userId, guestbookId, name, email, message, serviceContext);
+	}
+
+	public static Entry deleteEntry(long entryId) throws PortalException {
+		return getService().deleteEntry(entryId);
+	}
+
+	public static List<Entry> getEntries(long groupId, long guestbookId) {
+		return getService().getEntries(groupId, guestbookId);
+	}
+
+	public static List<Entry> getEntries(
+			long groupId, long guestbookId, int start, int end)
+		throws SystemException {
+
+		return getService().getEntries(groupId, guestbookId, start, end);
+	}
+
+	public static List<Entry> getEntries(
+		long groupId, long guestbookId, int start, int end,
+		OrderByComparator<Entry> obc) {
+
+		return getService().getEntries(groupId, guestbookId, start, end, obc);
+	}
+
+	public static int getEntriesCount(long groupId, long guestbookId) {
+		return getService().getEntriesCount(groupId, guestbookId);
+	}
+
+	public static Entry getEntry(long entryId)
+		throws com.docs.guidebook.exception.NoSuchEntryException {
+
+		return getService().getEntry(entryId);
+	}
 
 	/**
 	 * Returns the OSGi service identifier.
@@ -50,22 +92,20 @@ public class EntryServiceUtil {
 		return getService().getOSGiServiceIdentifier();
 	}
 
+	public static Entry updateEntry(
+			long userId, long guestbookId, long entryId, String name,
+			String email, String message,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		return getService().updateEntry(
+			userId, guestbookId, entryId, name, email, message, serviceContext);
+	}
+
 	public static EntryService getService() {
-		return _serviceTracker.getService();
+		return _service;
 	}
 
-	private static ServiceTracker<EntryService, EntryService> _serviceTracker;
-
-	static {
-		Bundle bundle = FrameworkUtil.getBundle(EntryService.class);
-
-		ServiceTracker<EntryService, EntryService> serviceTracker =
-			new ServiceTracker<EntryService, EntryService>(
-				bundle.getBundleContext(), EntryService.class, null);
-
-		serviceTracker.open();
-
-		_serviceTracker = serviceTracker;
-	}
+	private static volatile EntryService _service;
 
 }

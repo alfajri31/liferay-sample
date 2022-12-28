@@ -14,8 +14,6 @@
 
 package com.docs.guidebook.service;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.service.ServiceWrapper;
 
 /**
@@ -25,12 +23,48 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
  * @see GuidebookService
  * @generated
  */
-@ProviderType
 public class GuidebookServiceWrapper
 	implements GuidebookService, ServiceWrapper<GuidebookService> {
 
 	public GuidebookServiceWrapper(GuidebookService guidebookService) {
 		_guidebookService = guidebookService;
+	}
+
+	@Override
+	public com.docs.guidebook.model.Guidebook addGuestbook(
+			long userId, String name,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _guidebookService.addGuestbook(userId, name, serviceContext);
+	}
+
+	@Override
+	public java.util.List<com.docs.guidebook.model.Guidebook> getGuestbooks(
+		long groupId) {
+
+		return _guidebookService.getGuestbooks(groupId);
+	}
+
+	@Override
+	public java.util.List<com.docs.guidebook.model.Guidebook> getGuestbooks(
+		long groupId, int start, int end) {
+
+		return _guidebookService.getGuestbooks(groupId, start, end);
+	}
+
+	@Override
+	public java.util.List<com.docs.guidebook.model.Guidebook> getGuestbooks(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator
+			<com.docs.guidebook.model.Guidebook> obc) {
+
+		return _guidebookService.getGuestbooks(groupId, start, end, obc);
+	}
+
+	@Override
+	public int getGuestbooksCount(long groupId) {
+		return _guidebookService.getGuestbooksCount(groupId);
 	}
 
 	/**

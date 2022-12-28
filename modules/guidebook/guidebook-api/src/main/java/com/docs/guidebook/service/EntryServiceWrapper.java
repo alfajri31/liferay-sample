@@ -14,8 +14,6 @@
 
 package com.docs.guidebook.service;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.service.ServiceWrapper;
 
 /**
@@ -25,12 +23,65 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
  * @see EntryService
  * @generated
  */
-@ProviderType
 public class EntryServiceWrapper
 	implements EntryService, ServiceWrapper<EntryService> {
 
 	public EntryServiceWrapper(EntryService entryService) {
 		_entryService = entryService;
+	}
+
+	@Override
+	public com.docs.guidebook.model.Entry addEntry(
+			long userId, long guestbookId, String name, String email,
+			String message,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _entryService.addEntry(
+			userId, guestbookId, name, email, message, serviceContext);
+	}
+
+	@Override
+	public com.docs.guidebook.model.Entry deleteEntry(long entryId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _entryService.deleteEntry(entryId);
+	}
+
+	@Override
+	public java.util.List<com.docs.guidebook.model.Entry> getEntries(
+		long groupId, long guestbookId) {
+
+		return _entryService.getEntries(groupId, guestbookId);
+	}
+
+	@Override
+	public java.util.List<com.docs.guidebook.model.Entry> getEntries(
+			long groupId, long guestbookId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+
+		return _entryService.getEntries(groupId, guestbookId, start, end);
+	}
+
+	@Override
+	public java.util.List<com.docs.guidebook.model.Entry> getEntries(
+		long groupId, long guestbookId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator
+			<com.docs.guidebook.model.Entry> obc) {
+
+		return _entryService.getEntries(groupId, guestbookId, start, end, obc);
+	}
+
+	@Override
+	public int getEntriesCount(long groupId, long guestbookId) {
+		return _entryService.getEntriesCount(groupId, guestbookId);
+	}
+
+	@Override
+	public com.docs.guidebook.model.Entry getEntry(long entryId)
+		throws com.docs.guidebook.exception.NoSuchEntryException {
+
+		return _entryService.getEntry(entryId);
 	}
 
 	/**
@@ -41,6 +92,18 @@ public class EntryServiceWrapper
 	@Override
 	public String getOSGiServiceIdentifier() {
 		return _entryService.getOSGiServiceIdentifier();
+	}
+
+	@Override
+	public com.docs.guidebook.model.Entry updateEntry(
+			long userId, long guestbookId, long entryId, String name,
+			String email, String message,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			   com.liferay.portal.kernel.exception.SystemException {
+
+		return _entryService.updateEntry(
+			userId, guestbookId, entryId, name, email, message, serviceContext);
 	}
 
 	@Override

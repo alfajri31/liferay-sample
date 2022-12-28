@@ -14,8 +14,6 @@
 
 package com.docs.guidebook.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.docs.guidebook.model.Guidebook;
 import com.docs.guidebook.service.GuidebookLocalServiceUtil;
 
@@ -31,7 +29,6 @@ import com.docs.guidebook.service.GuidebookLocalServiceUtil;
  * @see Guidebook
  * @generated
  */
-@ProviderType
 public abstract class GuidebookBaseImpl
 	extends GuidebookModelImpl implements Guidebook {
 

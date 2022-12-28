@@ -14,8 +14,6 @@
 
 package com.docs.guidebook.model;
 
-import aQute.bnd.annotation.ProviderType;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -28,7 +26,6 @@ import java.util.List;
  * @author liferay
  * @generated
  */
-@ProviderType
 public class GuidebookSoap implements Serializable {
 
 	public static GuidebookSoap toSoapModel(Guidebook model) {

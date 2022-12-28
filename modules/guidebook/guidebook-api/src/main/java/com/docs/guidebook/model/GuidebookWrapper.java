@@ -14,8 +14,6 @@
 
 package com.docs.guidebook.model;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.exportimport.kernel.lar.StagedModelType;
 import com.liferay.portal.kernel.model.ModelWrapper;
@@ -37,7 +35,6 @@ import java.util.Objects;
  * @see Guidebook
  * @generated
  */
-@ProviderType
 public class GuidebookWrapper implements Guidebook, ModelWrapper<Guidebook> {
 
 	public GuidebookWrapper(Guidebook guidebook) {
@@ -661,16 +658,16 @@ public class GuidebookWrapper implements Guidebook, ModelWrapper<Guidebook> {
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
+	public boolean equals(Object object) {
+		if (this == object) {
 			return true;
 		}
 
-		if (!(obj instanceof GuidebookWrapper)) {
+		if (!(object instanceof GuidebookWrapper)) {
 			return false;
 		}
 
-		GuidebookWrapper guidebookWrapper = (GuidebookWrapper)obj;
+		GuidebookWrapper guidebookWrapper = (GuidebookWrapper)object;
 
 		if (Objects.equals(_guidebook, guidebookWrapper._guidebook)) {
 			return true;

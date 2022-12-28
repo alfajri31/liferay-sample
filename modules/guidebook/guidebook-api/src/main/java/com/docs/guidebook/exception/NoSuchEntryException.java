@@ -13,14 +13,11 @@
  */
 package com.docs.guidebook.exception;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.exception.NoSuchModelException;
 
 /**
  * @author liferay
  */
-@ProviderType
 public class NoSuchEntryException extends NoSuchModelException {
 
 	public NoSuchEntryException() {
@@ -30,12 +27,12 @@ public class NoSuchEntryException extends NoSuchModelException {
 		super(msg);
 	}
 
-	public NoSuchEntryException(String msg, Throwable cause) {
-		super(msg, cause);
+	public NoSuchEntryException(String msg, Throwable throwable) {
+		super(msg, throwable);
 	}
 
-	public NoSuchEntryException(Throwable cause) {
-		super(cause);
+	public NoSuchEntryException(Throwable throwable) {
+		super(throwable);
 	}
 
 }

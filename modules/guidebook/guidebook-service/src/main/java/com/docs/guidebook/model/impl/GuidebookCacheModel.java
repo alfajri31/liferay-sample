@@ -14,8 +14,6 @@
 
 package com.docs.guidebook.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.docs.guidebook.model.Guidebook;
 
 import com.liferay.portal.kernel.model.CacheModel;
@@ -35,21 +33,20 @@ import java.util.Date;
  * @author liferay
  * @generated
  */
-@ProviderType
 public class GuidebookCacheModel
 	implements CacheModel<Guidebook>, Externalizable {
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
+	public boolean equals(Object object) {
+		if (this == object) {
 			return true;
 		}
 
-		if (!(obj instanceof GuidebookCacheModel)) {
+		if (!(object instanceof GuidebookCacheModel)) {
 			return false;
 		}
 
-		GuidebookCacheModel guidebookCacheModel = (GuidebookCacheModel)obj;
+		GuidebookCacheModel guidebookCacheModel = (GuidebookCacheModel)object;
 
 		if (guidebookId == guidebookCacheModel.guidebookId) {
 			return true;

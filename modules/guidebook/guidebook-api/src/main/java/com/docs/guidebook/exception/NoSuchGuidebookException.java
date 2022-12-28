@@ -13,14 +13,11 @@
  */
 package com.docs.guidebook.exception;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.exception.NoSuchModelException;
 
 /**
  * @author liferay
  */
-@ProviderType
 public class NoSuchGuidebookException extends NoSuchModelException {
 
 	public NoSuchGuidebookException() {
@@ -30,12 +27,12 @@ public class NoSuchGuidebookException extends NoSuchModelException {
 		super(msg);
 	}
 
-	public NoSuchGuidebookException(String msg, Throwable cause) {
-		super(msg, cause);
+	public NoSuchGuidebookException(String msg, Throwable throwable) {
+		super(msg, throwable);
 	}
 
-	public NoSuchGuidebookException(Throwable cause) {
-		super(cause);
+	public NoSuchGuidebookException(Throwable throwable) {
+		super(throwable);
 	}
 
 }

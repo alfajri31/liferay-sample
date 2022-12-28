@@ -13,14 +13,11 @@
  */
 package com.docs.guidebook.exception;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.exception.PortalException;
 
 /**
  * @author liferay
  */
-@ProviderType
 public class EntryMessageException extends PortalException {
 
 	public EntryMessageException() {
@@ -30,12 +27,12 @@ public class EntryMessageException extends PortalException {
 		super(msg);
 	}
 
-	public EntryMessageException(String msg, Throwable cause) {
-		super(msg, cause);
+	public EntryMessageException(String msg, Throwable throwable) {
+		super(msg, throwable);
 	}
 
-	public EntryMessageException(Throwable cause) {
-		super(cause);
+	public EntryMessageException(Throwable throwable) {
+		super(throwable);
 	}
 
 }

@@ -14,8 +14,6 @@
 
 package com.docs.guidebook.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.docs.guidebook.model.Entry;
 import com.docs.guidebook.service.EntryLocalServiceUtil;
 
@@ -31,7 +29,6 @@ import com.docs.guidebook.service.EntryLocalServiceUtil;
  * @see Entry
  * @generated
  */
-@ProviderType
 public abstract class EntryBaseImpl extends EntryModelImpl implements Entry {
 
 	/*

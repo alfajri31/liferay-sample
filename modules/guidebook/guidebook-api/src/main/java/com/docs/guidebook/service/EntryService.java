@@ -16,14 +16,22 @@ package com.docs.guidebook.service;
 
 import aQute.bnd.annotation.ProviderType;
 
+import com.docs.guidebook.exception.NoSuchEntryException;
+import com.docs.guidebook.model.Entry;
+
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
 import com.liferay.portal.kernel.security.access.control.AccessControlled;
 import com.liferay.portal.kernel.service.BaseService;
+import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.spring.osgi.OSGiBeanProperties;
 import com.liferay.portal.kernel.transaction.Isolation;
+import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
+import com.liferay.portal.kernel.util.OrderByComparator;
+
+import java.util.List;
 
 /**
  * Provides the remote service interface for Entry. Methods of this
@@ -53,8 +61,33 @@ public interface EntryService extends BaseService {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link EntryServiceUtil} to access the entry remote service. Add custom service methods to <code>com.docs.guidebook.service.impl.EntryServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add custom service methods to <code>com.docs.guidebook.service.impl.EntryServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface. Consume the entry remote service via injection or a <code>org.osgi.util.tracker.ServiceTracker</code>. Use {@link EntryServiceUtil} if injection and service tracking are not available.
 	 */
+	public Entry addEntry(
+			long userId, long guestbookId, String name, String email,
+			String message, ServiceContext serviceContext)
+		throws PortalException;
+
+	public Entry deleteEntry(long entryId) throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Entry> getEntries(long groupId, long guestbookId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Entry> getEntries(
+			long groupId, long guestbookId, int start, int end)
+		throws SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Entry> getEntries(
+		long groupId, long guestbookId, int start, int end,
+		OrderByComparator<Entry> obc);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getEntriesCount(long groupId, long guestbookId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public Entry getEntry(long entryId) throws NoSuchEntryException;
 
 	/**
 	 * Returns the OSGi service identifier.
@@ -62,5 +95,10 @@ public interface EntryService extends BaseService {
 	 * @return the OSGi service identifier
 	 */
 	public String getOSGiServiceIdentifier();
+
+	public Entry updateEntry(
+			long userId, long guestbookId, long entryId, String name,
+			String email, String message, ServiceContext serviceContext)
+		throws PortalException, SystemException;
 
 }

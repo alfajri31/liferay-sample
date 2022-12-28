@@ -13,14 +13,11 @@
  */
 package com.docs.guidebook.exception;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.exception.PortalException;
 
 /**
  * @author liferay
  */
-@ProviderType
 public class GuestbookNameException extends PortalException {
 
 	public GuestbookNameException() {
@@ -30,12 +27,12 @@ public class GuestbookNameException extends PortalException {
 		super(msg);
 	}
 
-	public GuestbookNameException(String msg, Throwable cause) {
-		super(msg, cause);
+	public GuestbookNameException(String msg, Throwable throwable) {
+		super(msg, throwable);
 	}
 
-	public GuestbookNameException(Throwable cause) {
-		super(cause);
+	public GuestbookNameException(Throwable throwable) {
+		super(throwable);
 	}
 
 }

@@ -14,11 +14,16 @@
 
 package com.docs.guidebook.service.http;
 
-import aQute.bnd.annotation.ProviderType;
+import com.docs.guidebook.service.GuidebookServiceUtil;
+
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
+import java.rmi.RemoteException;
 
 /**
  * Provides the SOAP utility for the
- * <code>com.docs.guidebook.service.GuidebookServiceUtil</code> service
+ * <code>GuidebookServiceUtil</code> service
  * utility. The static methods of this class call the same methods of the
  * service utility. However, the signatures are different because it is
  * difficult for SOAP to support certain types.
@@ -55,6 +60,96 @@ import aQute.bnd.annotation.ProviderType;
  * @see GuidebookServiceHttp
  * @generated
  */
-@ProviderType
 public class GuidebookServiceSoap {
+
+	public static com.docs.guidebook.model.GuidebookSoap addGuestbook(
+			long userId, String name,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws RemoteException {
+
+		try {
+			com.docs.guidebook.model.Guidebook returnValue =
+				GuidebookServiceUtil.addGuestbook(userId, name, serviceContext);
+
+			return com.docs.guidebook.model.GuidebookSoap.toSoapModel(
+				returnValue);
+		}
+		catch (Exception exception) {
+			_log.error(exception, exception);
+
+			throw new RemoteException(exception.getMessage());
+		}
+	}
+
+	public static com.docs.guidebook.model.GuidebookSoap[] getGuestbooks(
+			long groupId)
+		throws RemoteException {
+
+		try {
+			java.util.List<com.docs.guidebook.model.Guidebook> returnValue =
+				GuidebookServiceUtil.getGuestbooks(groupId);
+
+			return com.docs.guidebook.model.GuidebookSoap.toSoapModels(
+				returnValue);
+		}
+		catch (Exception exception) {
+			_log.error(exception, exception);
+
+			throw new RemoteException(exception.getMessage());
+		}
+	}
+
+	public static com.docs.guidebook.model.GuidebookSoap[] getGuestbooks(
+			long groupId, int start, int end,
+			com.liferay.portal.kernel.util.OrderByComparator
+				<com.docs.guidebook.model.Guidebook> obc)
+		throws RemoteException {
+
+		try {
+			java.util.List<com.docs.guidebook.model.Guidebook> returnValue =
+				GuidebookServiceUtil.getGuestbooks(groupId, start, end, obc);
+
+			return com.docs.guidebook.model.GuidebookSoap.toSoapModels(
+				returnValue);
+		}
+		catch (Exception exception) {
+			_log.error(exception, exception);
+
+			throw new RemoteException(exception.getMessage());
+		}
+	}
+
+	public static com.docs.guidebook.model.GuidebookSoap[] getGuestbooks(
+			long groupId, int start, int end)
+		throws RemoteException {
+
+		try {
+			java.util.List<com.docs.guidebook.model.Guidebook> returnValue =
+				GuidebookServiceUtil.getGuestbooks(groupId, start, end);
+
+			return com.docs.guidebook.model.GuidebookSoap.toSoapModels(
+				returnValue);
+		}
+		catch (Exception exception) {
+			_log.error(exception, exception);
+
+			throw new RemoteException(exception.getMessage());
+		}
+	}
+
+	public static int getGuestbooksCount(long groupId) throws RemoteException {
+		try {
+			int returnValue = GuidebookServiceUtil.getGuestbooksCount(groupId);
+
+			return returnValue;
+		}
+		catch (Exception exception) {
+			_log.error(exception, exception);
+
+			throw new RemoteException(exception.getMessage());
+		}
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(GuidebookServiceSoap.class);
+
 }

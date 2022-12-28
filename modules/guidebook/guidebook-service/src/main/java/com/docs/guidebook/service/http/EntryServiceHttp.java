@@ -14,15 +14,22 @@
 
 package com.docs.guidebook.service.http;
 
-import aQute.bnd.annotation.ProviderType;
+import com.docs.guidebook.service.EntryServiceUtil;
+
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.security.auth.HttpPrincipal;
+import com.liferay.portal.kernel.service.http.TunnelUtil;
+import com.liferay.portal.kernel.util.MethodHandler;
+import com.liferay.portal.kernel.util.MethodKey;
 
 /**
  * Provides the HTTP utility for the
- * <code>com.docs.guidebook.service.EntryServiceUtil</code> service
+ * <code>EntryServiceUtil</code> service
  * utility. The
  * static methods of this class calls the same methods of the service utility.
  * However, the signatures are different because it requires an additional
- * <code>com.liferay.portal.kernel.security.auth.HttpPrincipal</code> parameter.
+ * <code>HttpPrincipal</code> parameter.
  *
  * <p>
  * The benefits of using the HTTP utility is that it is fast and allows for
@@ -43,6 +50,345 @@ import aQute.bnd.annotation.ProviderType;
  * @see EntryServiceSoap
  * @generated
  */
-@ProviderType
 public class EntryServiceHttp {
+
+	public static com.docs.guidebook.model.Entry addEntry(
+			HttpPrincipal httpPrincipal, long userId, long guestbookId,
+			String name, String email, String message,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				EntryServiceUtil.class, "addEntry", _addEntryParameterTypes0);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, userId, guestbookId, name, email, message,
+				serviceContext);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception exception) {
+				if (exception instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						exception;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					exception);
+			}
+
+			return (com.docs.guidebook.model.Entry)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException
+					systemException) {
+
+			_log.error(systemException, systemException);
+
+			throw systemException;
+		}
+	}
+
+	public static com.docs.guidebook.model.Entry updateEntry(
+			HttpPrincipal httpPrincipal, long userId, long guestbookId,
+			long entryId, String name, String email, String message,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			   com.liferay.portal.kernel.exception.SystemException {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				EntryServiceUtil.class, "updateEntry",
+				_updateEntryParameterTypes1);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, userId, guestbookId, entryId, name, email, message,
+				serviceContext);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception exception) {
+				if (exception instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						exception;
+				}
+
+				if (exception instanceof
+						com.liferay.portal.kernel.exception.SystemException) {
+
+					throw (com.liferay.portal.kernel.exception.SystemException)
+						exception;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					exception);
+			}
+
+			return (com.docs.guidebook.model.Entry)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException
+					systemException) {
+
+			_log.error(systemException, systemException);
+
+			throw systemException;
+		}
+	}
+
+	public static com.docs.guidebook.model.Entry deleteEntry(
+			HttpPrincipal httpPrincipal, long entryId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				EntryServiceUtil.class, "deleteEntry",
+				_deleteEntryParameterTypes2);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey, entryId);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception exception) {
+				if (exception instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						exception;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					exception);
+			}
+
+			return (com.docs.guidebook.model.Entry)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException
+					systemException) {
+
+			_log.error(systemException, systemException);
+
+			throw systemException;
+		}
+	}
+
+	public static com.docs.guidebook.model.Entry getEntry(
+			HttpPrincipal httpPrincipal, long entryId)
+		throws com.docs.guidebook.exception.NoSuchEntryException {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				EntryServiceUtil.class, "getEntry", _getEntryParameterTypes3);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey, entryId);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception exception) {
+				if (exception instanceof
+						com.docs.guidebook.exception.NoSuchEntryException) {
+
+					throw (com.docs.guidebook.exception.NoSuchEntryException)
+						exception;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					exception);
+			}
+
+			return (com.docs.guidebook.model.Entry)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException
+					systemException) {
+
+			_log.error(systemException, systemException);
+
+			throw systemException;
+		}
+	}
+
+	public static java.util.List<com.docs.guidebook.model.Entry> getEntries(
+		HttpPrincipal httpPrincipal, long groupId, long guestbookId) {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				EntryServiceUtil.class, "getEntries",
+				_getEntriesParameterTypes4);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, groupId, guestbookId);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception exception) {
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					exception);
+			}
+
+			return (java.util.List<com.docs.guidebook.model.Entry>)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException
+					systemException) {
+
+			_log.error(systemException, systemException);
+
+			throw systemException;
+		}
+	}
+
+	public static java.util.List<com.docs.guidebook.model.Entry> getEntries(
+			HttpPrincipal httpPrincipal, long groupId, long guestbookId,
+			int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				EntryServiceUtil.class, "getEntries",
+				_getEntriesParameterTypes5);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, groupId, guestbookId, start, end);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception exception) {
+				if (exception instanceof
+						com.liferay.portal.kernel.exception.SystemException) {
+
+					throw (com.liferay.portal.kernel.exception.SystemException)
+						exception;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					exception);
+			}
+
+			return (java.util.List<com.docs.guidebook.model.Entry>)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException
+					systemException) {
+
+			_log.error(systemException, systemException);
+
+			throw systemException;
+		}
+	}
+
+	public static java.util.List<com.docs.guidebook.model.Entry> getEntries(
+		HttpPrincipal httpPrincipal, long groupId, long guestbookId, int start,
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator
+			<com.docs.guidebook.model.Entry> obc) {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				EntryServiceUtil.class, "getEntries",
+				_getEntriesParameterTypes6);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, groupId, guestbookId, start, end, obc);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception exception) {
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					exception);
+			}
+
+			return (java.util.List<com.docs.guidebook.model.Entry>)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException
+					systemException) {
+
+			_log.error(systemException, systemException);
+
+			throw systemException;
+		}
+	}
+
+	public static int getEntriesCount(
+		HttpPrincipal httpPrincipal, long groupId, long guestbookId) {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				EntryServiceUtil.class, "getEntriesCount",
+				_getEntriesCountParameterTypes7);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, groupId, guestbookId);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception exception) {
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					exception);
+			}
+
+			return ((Integer)returnObj).intValue();
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException
+					systemException) {
+
+			_log.error(systemException, systemException);
+
+			throw systemException;
+		}
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(EntryServiceHttp.class);
+
+	private static final Class<?>[] _addEntryParameterTypes0 = new Class[] {
+		long.class, long.class, String.class, String.class, String.class,
+		com.liferay.portal.kernel.service.ServiceContext.class
+	};
+	private static final Class<?>[] _updateEntryParameterTypes1 = new Class[] {
+		long.class, long.class, long.class, String.class, String.class,
+		String.class, com.liferay.portal.kernel.service.ServiceContext.class
+	};
+	private static final Class<?>[] _deleteEntryParameterTypes2 = new Class[] {
+		long.class
+	};
+	private static final Class<?>[] _getEntryParameterTypes3 = new Class[] {
+		long.class
+	};
+	private static final Class<?>[] _getEntriesParameterTypes4 = new Class[] {
+		long.class, long.class
+	};
+	private static final Class<?>[] _getEntriesParameterTypes5 = new Class[] {
+		long.class, long.class, int.class, int.class
+	};
+	private static final Class<?>[] _getEntriesParameterTypes6 = new Class[] {
+		long.class, long.class, int.class, int.class,
+		com.liferay.portal.kernel.util.OrderByComparator.class
+	};
+	private static final Class<?>[] _getEntriesCountParameterTypes7 =
+		new Class[] {long.class, long.class};
+
 }

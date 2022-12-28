@@ -14,11 +14,12 @@
 
 package com.docs.guidebook.service;
 
-import aQute.bnd.annotation.ProviderType;
+import com.docs.guidebook.model.Guidebook;
 
-import org.osgi.framework.Bundle;
-import org.osgi.framework.FrameworkUtil;
-import org.osgi.util.tracker.ServiceTracker;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+
+import java.util.List;
 
 /**
  * Provides the remote service utility for Guidebook. This utility wraps
@@ -32,7 +33,6 @@ import org.osgi.util.tracker.ServiceTracker;
  * @see GuidebookService
  * @generated
  */
-@ProviderType
 public class GuidebookServiceUtil {
 
 	/*
@@ -40,6 +40,33 @@ public class GuidebookServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to <code>com.docs.guidebook.service.impl.GuidebookServiceImpl</code> and rerun ServiceBuilder to regenerate this class.
 	 */
+	public static Guidebook addGuestbook(
+			long userId, String name,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws PortalException {
+
+		return getService().addGuestbook(userId, name, serviceContext);
+	}
+
+	public static List<Guidebook> getGuestbooks(long groupId) {
+		return getService().getGuestbooks(groupId);
+	}
+
+	public static List<Guidebook> getGuestbooks(
+		long groupId, int start, int end) {
+
+		return getService().getGuestbooks(groupId, start, end);
+	}
+
+	public static List<Guidebook> getGuestbooks(
+		long groupId, int start, int end, OrderByComparator<Guidebook> obc) {
+
+		return getService().getGuestbooks(groupId, start, end, obc);
+	}
+
+	public static int getGuestbooksCount(long groupId) {
+		return getService().getGuestbooksCount(groupId);
+	}
 
 	/**
 	 * Returns the OSGi service identifier.
@@ -51,22 +78,9 @@ public class GuidebookServiceUtil {
 	}
 
 	public static GuidebookService getService() {
-		return _serviceTracker.getService();
+		return _service;
 	}
 
-	private static ServiceTracker<GuidebookService, GuidebookService>
-		_serviceTracker;
-
-	static {
-		Bundle bundle = FrameworkUtil.getBundle(GuidebookService.class);
-
-		ServiceTracker<GuidebookService, GuidebookService> serviceTracker =
-			new ServiceTracker<GuidebookService, GuidebookService>(
-				bundle.getBundleContext(), GuidebookService.class, null);
-
-		serviceTracker.open();
-
-		_serviceTracker = serviceTracker;
-	}
+	private static volatile GuidebookService _service;
 
 }

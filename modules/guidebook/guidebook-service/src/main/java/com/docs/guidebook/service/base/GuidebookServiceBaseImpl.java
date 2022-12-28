@@ -16,6 +16,7 @@ package com.docs.guidebook.service.base;
 
 import com.docs.guidebook.model.Guidebook;
 import com.docs.guidebook.service.GuidebookService;
+import com.docs.guidebook.service.GuidebookServiceUtil;
 import com.docs.guidebook.service.persistence.EntryPersistence;
 import com.docs.guidebook.service.persistence.GuidebookPersistence;
 
@@ -25,12 +26,16 @@ import com.liferay.portal.kernel.dao.db.DBManagerUtil;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.module.framework.service.IdentifiableOSGiService;
 import com.liferay.portal.kernel.service.BaseServiceImpl;
 import com.liferay.portal.kernel.service.persistence.ClassNamePersistence;
 import com.liferay.portal.kernel.service.persistence.UserPersistence;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.spring.extender.service.ServiceReference;
+
+import java.lang.reflect.Field;
 
 import javax.sql.DataSource;
 
@@ -52,7 +57,7 @@ public abstract class GuidebookServiceBaseImpl
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. Use <code>GuidebookService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.docs.guidebook.service.GuidebookServiceUtil</code>.
+	 * Never modify or reference this class directly. Use <code>GuidebookService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>GuidebookServiceUtil</code>.
 	 */
 
 	/**
@@ -346,9 +351,11 @@ public abstract class GuidebookServiceBaseImpl
 	}
 
 	public void afterPropertiesSet() {
+		_setServiceUtilService(guidebookService);
 	}
 
 	public void destroy() {
+		_setServiceUtilService(null);
 	}
 
 	/**
@@ -388,8 +395,22 @@ public abstract class GuidebookServiceBaseImpl
 
 			sqlUpdate.update();
 		}
-		catch (Exception e) {
-			throw new SystemException(e);
+		catch (Exception exception) {
+			throw new SystemException(exception);
+		}
+	}
+
+	private void _setServiceUtilService(GuidebookService guidebookService) {
+		try {
+			Field field = GuidebookServiceUtil.class.getDeclaredField(
+				"_service");
+
+			field.setAccessible(true);
+
+			field.set(null, guidebookService);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 
@@ -454,5 +475,8 @@ public abstract class GuidebookServiceBaseImpl
 
 	@ServiceReference(type = UserPersistence.class)
 	protected UserPersistence userPersistence;
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		GuidebookServiceBaseImpl.class);
 
 }

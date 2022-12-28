@@ -16,6 +16,7 @@ package com.docs.guidebook.service.base;
 
 import com.docs.guidebook.model.Entry;
 import com.docs.guidebook.service.EntryService;
+import com.docs.guidebook.service.EntryServiceUtil;
 import com.docs.guidebook.service.persistence.EntryPersistence;
 import com.docs.guidebook.service.persistence.GuidebookPersistence;
 
@@ -25,12 +26,16 @@ import com.liferay.portal.kernel.dao.db.DBManagerUtil;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.module.framework.service.IdentifiableOSGiService;
 import com.liferay.portal.kernel.service.BaseServiceImpl;
 import com.liferay.portal.kernel.service.persistence.ClassNamePersistence;
 import com.liferay.portal.kernel.service.persistence.UserPersistence;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.spring.extender.service.ServiceReference;
+
+import java.lang.reflect.Field;
 
 import javax.sql.DataSource;
 
@@ -51,7 +56,7 @@ public abstract class EntryServiceBaseImpl
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. Use <code>EntryService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.docs.guidebook.service.EntryServiceUtil</code>.
+	 * Never modify or reference this class directly. Use <code>EntryService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>EntryServiceUtil</code>.
 	 */
 
 	/**
@@ -345,9 +350,11 @@ public abstract class EntryServiceBaseImpl
 	}
 
 	public void afterPropertiesSet() {
+		_setServiceUtilService(entryService);
 	}
 
 	public void destroy() {
+		_setServiceUtilService(null);
 	}
 
 	/**
@@ -387,8 +394,21 @@ public abstract class EntryServiceBaseImpl
 
 			sqlUpdate.update();
 		}
-		catch (Exception e) {
-			throw new SystemException(e);
+		catch (Exception exception) {
+			throw new SystemException(exception);
+		}
+	}
+
+	private void _setServiceUtilService(EntryService entryService) {
+		try {
+			Field field = EntryServiceUtil.class.getDeclaredField("_service");
+
+			field.setAccessible(true);
+
+			field.set(null, entryService);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 
@@ -453,5 +473,8 @@ public abstract class EntryServiceBaseImpl
 
 	@ServiceReference(type = UserPersistence.class)
 	protected UserPersistence userPersistence;
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		EntryServiceBaseImpl.class);
 
 }

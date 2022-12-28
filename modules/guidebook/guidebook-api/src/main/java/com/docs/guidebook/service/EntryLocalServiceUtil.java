@@ -14,11 +14,16 @@
 
 package com.docs.guidebook.service;
 
-import aQute.bnd.annotation.ProviderType;
+import com.docs.guidebook.model.Entry;
 
-import org.osgi.framework.Bundle;
-import org.osgi.framework.FrameworkUtil;
-import org.osgi.util.tracker.ServiceTracker;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.PersistedModel;
+import com.liferay.portal.kernel.util.OrderByComparator;
+
+import java.io.Serializable;
+
+import java.util.List;
 
 /**
  * Provides the local service utility for Entry. This utility wraps
@@ -32,7 +37,6 @@ import org.osgi.util.tracker.ServiceTracker;
  * @see EntryLocalService
  * @generated
  */
-@ProviderType
 public class EntryLocalServiceUtil {
 
 	/*
@@ -44,12 +48,14 @@ public class EntryLocalServiceUtil {
 	/**
 	 * Adds the entry to the database. Also notifies the appropriate model listeners.
 	 *
+	 * <p>
+	 * <strong>Important:</strong> Inspect EntryLocalServiceImpl for overloaded versions of the method. If provided, use these entry points to the API, as the implementation logic may require the additional parameters defined there.
+	 * </p>
+	 *
 	 * @param entry the entry
 	 * @return the entry that was added
 	 */
-	public static com.docs.guidebook.model.Entry addEntry(
-		com.docs.guidebook.model.Entry entry) {
-
+	public static Entry addEntry(Entry entry) {
 		return getService().addEntry(entry);
 	}
 
@@ -59,49 +65,50 @@ public class EntryLocalServiceUtil {
 	 * @param entryId the primary key for the new entry
 	 * @return the new entry
 	 */
-	public static com.docs.guidebook.model.Entry createEntry(long entryId) {
+	public static Entry createEntry(long entryId) {
 		return getService().createEntry(entryId);
 	}
 
 	/**
 	 * Deletes the entry from the database. Also notifies the appropriate model listeners.
 	 *
+	 * <p>
+	 * <strong>Important:</strong> Inspect EntryLocalServiceImpl for overloaded versions of the method. If provided, use these entry points to the API, as the implementation logic may require the additional parameters defined there.
+	 * </p>
+	 *
 	 * @param entry the entry
 	 * @return the entry that was removed
 	 */
-	public static com.docs.guidebook.model.Entry deleteEntry(
-		com.docs.guidebook.model.Entry entry) {
-
+	public static Entry deleteEntry(Entry entry) {
 		return getService().deleteEntry(entry);
 	}
 
 	/**
 	 * Deletes the entry with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
+	 * <p>
+	 * <strong>Important:</strong> Inspect EntryLocalServiceImpl for overloaded versions of the method. If provided, use these entry points to the API, as the implementation logic may require the additional parameters defined there.
+	 * </p>
+	 *
 	 * @param entryId the primary key of the entry
 	 * @return the entry that was removed
 	 * @throws PortalException if a entry with the primary key could not be found
 	 */
-	public static com.docs.guidebook.model.Entry deleteEntry(long entryId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-
+	public static Entry deleteEntry(long entryId) throws PortalException {
 		return getService().deleteEntry(entryId);
 	}
 
 	/**
 	 * @throws PortalException
 	 */
-	public static com.liferay.portal.kernel.model.PersistedModel
-			deletePersistedModel(
-				com.liferay.portal.kernel.model.PersistedModel persistedModel)
-		throws com.liferay.portal.kernel.exception.PortalException {
+	public static PersistedModel deletePersistedModel(
+			PersistedModel persistedModel)
+		throws PortalException {
 
 		return getService().deletePersistedModel(persistedModel);
 	}
 
-	public static com.liferay.portal.kernel.dao.orm.DynamicQuery
-		dynamicQuery() {
-
+	public static DynamicQuery dynamicQuery() {
 		return getService().dynamicQuery();
 	}
 
@@ -111,9 +118,7 @@ public class EntryLocalServiceUtil {
 	 * @param dynamicQuery the dynamic query
 	 * @return the matching rows
 	 */
-	public static <T> java.util.List<T> dynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery) {
-
+	public static <T> List<T> dynamicQuery(DynamicQuery dynamicQuery) {
 		return getService().dynamicQuery(dynamicQuery);
 	}
 
@@ -121,7 +126,7 @@ public class EntryLocalServiceUtil {
 	 * Performs a dynamic query on the database and returns a range of the matching rows.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>com.docs.guidebook.model.impl.EntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>com.docs.guidebook.model.impl.EntryModelImpl</code>.
 	 * </p>
 	 *
 	 * @param dynamicQuery the dynamic query
@@ -129,9 +134,8 @@ public class EntryLocalServiceUtil {
 	 * @param end the upper bound of the range of model instances (not inclusive)
 	 * @return the range of matching rows
 	 */
-	public static <T> java.util.List<T> dynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) {
+	public static <T> List<T> dynamicQuery(
+		DynamicQuery dynamicQuery, int start, int end) {
 
 		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
@@ -140,7 +144,7 @@ public class EntryLocalServiceUtil {
 	 * Performs a dynamic query on the database and returns an ordered range of the matching rows.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>com.docs.guidebook.model.impl.EntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>com.docs.guidebook.model.impl.EntryModelImpl</code>.
 	 * </p>
 	 *
 	 * @param dynamicQuery the dynamic query
@@ -149,10 +153,9 @@ public class EntryLocalServiceUtil {
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching rows
 	 */
-	public static <T> java.util.List<T> dynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end,
-		com.liferay.portal.kernel.util.OrderByComparator<T> orderByComparator) {
+	public static <T> List<T> dynamicQuery(
+		DynamicQuery dynamicQuery, int start, int end,
+		OrderByComparator<T> orderByComparator) {
 
 		return getService().dynamicQuery(
 			dynamicQuery, start, end, orderByComparator);
@@ -164,9 +167,7 @@ public class EntryLocalServiceUtil {
 	 * @param dynamicQuery the dynamic query
 	 * @return the number of rows matching the dynamic query
 	 */
-	public static long dynamicQueryCount(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery) {
-
+	public static long dynamicQueryCount(DynamicQuery dynamicQuery) {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
@@ -178,13 +179,13 @@ public class EntryLocalServiceUtil {
 	 * @return the number of rows matching the dynamic query
 	 */
 	public static long dynamicQueryCount(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery,
+		DynamicQuery dynamicQuery,
 		com.liferay.portal.kernel.dao.orm.Projection projection) {
 
 		return getService().dynamicQueryCount(dynamicQuery, projection);
 	}
 
-	public static com.docs.guidebook.model.Entry fetchEntry(long entryId) {
+	public static Entry fetchEntry(long entryId) {
 		return getService().fetchEntry(entryId);
 	}
 
@@ -195,9 +196,7 @@ public class EntryLocalServiceUtil {
 	 * @param groupId the primary key of the group
 	 * @return the matching entry, or <code>null</code> if a matching entry could not be found
 	 */
-	public static com.docs.guidebook.model.Entry fetchEntryByUuidAndGroupId(
-		String uuid, long groupId) {
-
+	public static Entry fetchEntryByUuidAndGroupId(String uuid, long groupId) {
 		return getService().fetchEntryByUuidAndGroupId(uuid, groupId);
 	}
 
@@ -211,16 +210,14 @@ public class EntryLocalServiceUtil {
 	 * Returns a range of all the entries.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>com.docs.guidebook.model.impl.EntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>com.docs.guidebook.model.impl.EntryModelImpl</code>.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of entries
 	 * @param end the upper bound of the range of entries (not inclusive)
 	 * @return the range of entries
 	 */
-	public static java.util.List<com.docs.guidebook.model.Entry> getEntries(
-		int start, int end) {
-
+	public static List<Entry> getEntries(int start, int end) {
 		return getService().getEntries(start, end);
 	}
 
@@ -231,8 +228,8 @@ public class EntryLocalServiceUtil {
 	 * @param companyId the primary key of the company
 	 * @return the matching entries, or an empty list if no matches were found
 	 */
-	public static java.util.List<com.docs.guidebook.model.Entry>
-		getEntriesByUuidAndCompanyId(String uuid, long companyId) {
+	public static List<Entry> getEntriesByUuidAndCompanyId(
+		String uuid, long companyId) {
 
 		return getService().getEntriesByUuidAndCompanyId(uuid, companyId);
 	}
@@ -247,11 +244,9 @@ public class EntryLocalServiceUtil {
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the range of matching entries, or an empty list if no matches were found
 	 */
-	public static java.util.List<com.docs.guidebook.model.Entry>
-		getEntriesByUuidAndCompanyId(
-			String uuid, long companyId, int start, int end,
-			com.liferay.portal.kernel.util.OrderByComparator
-				<com.docs.guidebook.model.Entry> orderByComparator) {
+	public static List<Entry> getEntriesByUuidAndCompanyId(
+		String uuid, long companyId, int start, int end,
+		OrderByComparator<Entry> orderByComparator) {
 
 		return getService().getEntriesByUuidAndCompanyId(
 			uuid, companyId, start, end, orderByComparator);
@@ -273,9 +268,7 @@ public class EntryLocalServiceUtil {
 	 * @return the entry
 	 * @throws PortalException if a entry with the primary key could not be found
 	 */
-	public static com.docs.guidebook.model.Entry getEntry(long entryId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-
+	public static Entry getEntry(long entryId) throws PortalException {
 		return getService().getEntry(entryId);
 	}
 
@@ -287,9 +280,8 @@ public class EntryLocalServiceUtil {
 	 * @return the matching entry
 	 * @throws PortalException if a matching entry could not be found
 	 */
-	public static com.docs.guidebook.model.Entry getEntryByUuidAndGroupId(
-			String uuid, long groupId)
-		throws com.liferay.portal.kernel.exception.PortalException {
+	public static Entry getEntryByUuidAndGroupId(String uuid, long groupId)
+		throws PortalException {
 
 		return getService().getEntryByUuidAndGroupId(uuid, groupId);
 	}
@@ -318,9 +310,11 @@ public class EntryLocalServiceUtil {
 		return getService().getOSGiServiceIdentifier();
 	}
 
-	public static com.liferay.portal.kernel.model.PersistedModel
-			getPersistedModel(java.io.Serializable primaryKeyObj)
-		throws com.liferay.portal.kernel.exception.PortalException {
+	/**
+	 * @throws PortalException
+	 */
+	public static PersistedModel getPersistedModel(Serializable primaryKeyObj)
+		throws PortalException {
 
 		return getService().getPersistedModel(primaryKeyObj);
 	}
@@ -328,32 +322,21 @@ public class EntryLocalServiceUtil {
 	/**
 	 * Updates the entry in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
 	 *
+	 * <p>
+	 * <strong>Important:</strong> Inspect EntryLocalServiceImpl for overloaded versions of the method. If provided, use these entry points to the API, as the implementation logic may require the additional parameters defined there.
+	 * </p>
+	 *
 	 * @param entry the entry
 	 * @return the entry that was updated
 	 */
-	public static com.docs.guidebook.model.Entry updateEntry(
-		com.docs.guidebook.model.Entry entry) {
-
+	public static Entry updateEntry(Entry entry) {
 		return getService().updateEntry(entry);
 	}
 
 	public static EntryLocalService getService() {
-		return _serviceTracker.getService();
+		return _service;
 	}
 
-	private static ServiceTracker<EntryLocalService, EntryLocalService>
-		_serviceTracker;
-
-	static {
-		Bundle bundle = FrameworkUtil.getBundle(EntryLocalService.class);
-
-		ServiceTracker<EntryLocalService, EntryLocalService> serviceTracker =
-			new ServiceTracker<EntryLocalService, EntryLocalService>(
-				bundle.getBundleContext(), EntryLocalService.class, null);
-
-		serviceTracker.open();
-
-		_serviceTracker = serviceTracker;
-	}
+	private static volatile EntryLocalService _service;
 
 }
